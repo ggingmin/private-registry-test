@@ -49,5 +49,5 @@ jobs:
             name: test
             app: container
             options:
-              ports: 3000
+              ports: 8080
               image: ${{ steps.meta.outputs.tags }}
