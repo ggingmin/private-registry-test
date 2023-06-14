@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  REGISTRY: ${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GAR_REPOSITORY }}  
+  REGISTRY: ${{ secrets.AZURE_REGISTRY_NAME }}.azurecr.io
   IMAGE_NAME: test
 
 jobs:
@@ -21,9 +21,9 @@ jobs:
       - name: Log in to the Container registry
         uses: docker/login-action@v2
         with:
-          registry: ${{ secrets.GCP_LOCATION }}-docker.pkg.dev
-          username: _json_key
-          password: ${{ secrets.GAR_JSON_KEY }}
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.AZURE_CLIENT_ID }}
+          password: ${{ secrets.AZURE_CLIENT_SECRET }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
